@@ -56,8 +56,6 @@ scalepoints <- function(points,low=0,up=1)
 	return(new.points)
 }
 
-
-
 readFLUOSTARtomatrix <- function(file)
 {
 	data <- read.csv(file,sep=';',dec=',',skip=5)
