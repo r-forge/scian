@@ -1,61 +1,3 @@
-deltaDO <- function(cinetic,t.log=TRUE)
-{
-	len.cin <- length(cinetic)
-	delta <- cinetic[len.cin]/cinetic[1]
-	if(t.log){delta <- log(delta)}
-	return(delta)
-}
-
-giveDeltaDO <- function(vec,...,t.log=TRUE)
-{
-	return(deltaDO(vec,t.log))
-}
-
-selectdata <- function(data,row,col)
-{
-	set <- subset(data,(data$Well.Col==col)&(data$Well.Row==row))
-	return(as.numeric(set[4]))
-}
-
-findpos <- function(vecofpos,separator=':')
-{
-	listofcol <- NULL
-	listofrow <- NULL
-	for(i in 1:length(vecofpos))
-	{
-		coord <- strsplit(vecofpos[i],separator)[[1]]
-		listofcol[i] <- coord[2]
-		listofrow[i] <- coord[1]
-	}
-	result <- as.data.frame(cbind(listofrow,listofcol))
-	colnames(result) <- c('Row','Column')
-	return(result)
-}
-
-getcinetic <- function(filenames,positions)
-{
-	OD <- NULL
-	for(i in 1:length(filenames))
-	{
-		current.plate <- read.table(filenames[i])
-		colnames(current.plate) <- c(1:ncol(current.plate))
-		rownames(current.plate) <- LETTERS[1:nrow(current.plate)]
-		ROW <- as.character(positions$'Row')[i]
-		COL <- as.numeric(positions$'Column')[i]
-		OD[i] <- current.plate[ROW,COL]
-	}
-	return(OD)
-}
-
-scalepoints <- function(points,low=0,up=1)
-{
-	new.points <- points - min(points)
-	new.points <- new.points / max(new.points)
-	new.points <- new.points * (up-low)
-	new.points <- new.points + low
-	return(new.points)
-}
-
 readFLUOSTARtomatrix <- function(file)
 {
 	data <- read.csv(file,sep=';',dec=',',skip=5)
@@ -183,25 +125,6 @@ getComb <- function(vec1,vec2)
 	return(comb)
 }
 
-formatDF <- function(data)
-{
-	nDF <- NULL
-	well.id <- NULL
-	col <- unique(data$Well.Col)
-	row <- as.character(unique(data$Well.Row))
-	for(i in 1:length(col))
-	{
-		for(j in 1:length(row))
-		{
-			well.id <- c(well.id,as.character(paste(row[j],col[i],sep='')))
-			well.cin <- gCIN(data,col[i],row[j])
-			nDF <- as.data.frame(cbind(nDF,well.cin))
-		}
-	}
-	colnames(nDF) <- well.id
-	return(nDF)
-}
-
 doforcin <- function(cin,fun,...,whole=FALSE)
 {
 	temp <- NULL
@@ -212,9 +135,4 @@ doforcin <- function(cin,fun,...,whole=FALSE)
 	if(whole){output <- c(mean(temp),sd(temp))}
 	else{output<-temp}
 	return(output)
-}
-
-read.cinetic <- function(file)
-{
-	return(read.csv(file,h=TRUE,sep=';',dec=',',skip=5))
 }
