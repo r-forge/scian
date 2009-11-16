@@ -1,0 +1,1 @@
+last = function(v) v[length(v)]
