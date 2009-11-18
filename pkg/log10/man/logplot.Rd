@@ -2,7 +2,7 @@
 \Rdversion{1.1} 
 \alias{logplot} 
 \title{Decimal x-y plot}
-\description{Give the maximal growth rate during a cinetic}
+\description{}
 \usage{ 
 logplot(x,y,log='xy',forceylim=c(0,0),forcexlim=c(0,0),yint='r',xint='r',...)
 }
