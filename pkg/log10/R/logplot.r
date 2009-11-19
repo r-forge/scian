@@ -1,4 +1,4 @@
-drawlogaxis <- function(side,range)
+logaxis <- function(side,range)
 {
 	par(tck=0.02,las=1)
 	d <- range
@@ -42,11 +42,11 @@ logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
 	ylg <- FALSE
 	if('x'%in%strsplit(log,'')[[1]]){x <- log(x,10);xlg=TRUE}
 	if('y'%in%strsplit(log,'')[[1]]){y <- log(y,10);ylg=TRUE}
-	if(xlg){xlim=xlim}else{xlim=xlim}
-	if(ylg){ylim=ylim}else{ylim=ylim}
+	if(xlg){xlim=log(xlim,10)}else{xlim=xlim}
+	if(ylg){ylim=log(ylim,10)}else{ylim=ylim}
 	plot.default(x,y,axes=FALSE,ylim=ylim,xlim=xlim,...)
-	if(xlg){drawlogaxis(1,xlim)}else{axis(1,at=pretty(xlim),labels=pretty(xlim))}
-	if(ylg){drawlogaxis(2,ylim)}else{axis(2,at=pretty(ylim),labels=pretty(ylim))}
+	if(xlg){logaxis(1,xlim)}else{axis(1,at=pretty(xlim),labels=pretty(xlim))}
+	if(ylg){logaxis(2,ylim)}else{axis(2,at=pretty(ylim),labels=pretty(ylim))}
 	box()
 }
 
@@ -71,21 +71,11 @@ logfill <- function(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black
 	if(is.null(rownames(z))){rownames(z)<-c(1:nrow(z))}
 	x <- as.numeric(rownames(z))
 	y <- as.numeric(colnames(z))
-	if('x'%in%strsplit(log,'')[[1]])
-	{
-		fxl <- range(log(x,10))
-		x <- log(x,10)
-	} else {
-		fxl <- range(x)
-	}
-	if('y'%in%strsplit(log,'')[[1]])
-	{
-		fyl <- range(log(y,10))
-		y <- log(y,10)
-	} else {
-		fyl <- range(y)
-	}
-	logplot(1,1,xlim=fxl,ylim=fyl,log=log,pch=NA,xint=int[1],yint=int[2],...)
+	xl <- range(x)
+	yl <- range(y)
+	if('x'%in%strsplit(log,'')[[1]]){x <- log(x,10)}
+	if('y'%in%strsplit(log,'')[[1]]){y <- log(y,10)}
+	logplot(range(x),range(y),log=log,pch=NA,xint=int[1],yint=int[2],xlim=xl,ylim=yl,...)
 	levels <- pretty(range(z),f.nbins)
 	col <- pal(length(levels)-1)
 	.Internal(filledcontour(
@@ -97,11 +87,11 @@ logfill <- function(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black
 		)
 	if('x'%in%strsplit(log,'')[[1]])
 	{
-		drawlogaxis(1,fxl)
+		logaxis(1,log(xl,10))
 	}
 	if('y'%in%strsplit(log,'')[[1]])
 	{
-		drawlogaxis(2,fyl)
+		logaxis(2,log(yl,10))
 	}
 	if(c.nbins>0){contour(x,y,z,add=TRUE,col=c.col,n.levels=c.nbins,labcex=labcex)}
 }

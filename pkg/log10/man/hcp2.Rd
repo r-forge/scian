@@ -2,7 +2,7 @@
 \Rdversion{1.1} 
 \alias{hcp2} 
 \title{High contrast palette 2}
-\description{}
+\description{Provides a high contrast palette ranging from black to darkred}
 \usage{ 
 hcp2(n)
 }
@@ -13,7 +13,5 @@ hcp2(n)
 
 \examples{ 
 data(volcano)
-par(mfcol=c(1,2),pty='s')
-logfill(volcano)
 logfill(volcano,log='',pal=hcp2)
 }

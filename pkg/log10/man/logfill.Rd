@@ -2,7 +2,7 @@
 \Rdversion{1.1} 
 \alias{logfill} 
 \title{Decimal x-y filledcontour plot}
-\description{}
+\description{Plot a filledcontour plot with 10-log axes, and superposes a contour plot with values}
 \usage{ 
 logfill(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black',int=c('i','i'),labcex=0.8,...)
 }

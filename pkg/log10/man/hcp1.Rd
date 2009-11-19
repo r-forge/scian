@@ -2,7 +2,7 @@
 \Rdversion{1.1} 
 \alias{hcp1} 
 \title{High contrast palette 1}
-\description{}
+\description{Provides a high contrast palette ranging from blue to red}
 \usage{ 
 hcp1(n)
 }
@@ -13,7 +13,5 @@ hcp1(n)
 
 \examples{ 
 data(volcano)
-par(mfcol=c(1,2),pty='s')
-logfill(volcano)
 logfill(volcano,log='',pal=hcp1)
 }

@@ -15,7 +15,7 @@ addlog(x,y,log='xy',...)
 }
 
 \examples{ 
-a <- seq(from=1,to=100,by=0.1)^2
+a <- seq(from=1,to=100,by=1)^2
 logplot(a,log='y')
-addplot(a+1e3,log='y')
+addlog(a+1e3,log='y')
 }

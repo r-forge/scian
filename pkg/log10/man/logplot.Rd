@@ -2,7 +2,7 @@
 \Rdversion{1.1} 
 \alias{logplot} 
 \title{Decimal x-y plot}
-\description{}
+\description{Plot X and Y values with 10-log scales}
 \usage{ 
 logplot(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
 }
@@ -17,8 +17,7 @@ logplot(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
 \item{xint}{The type of x axis : internal of regular. See \kbd{par} and the \kbd{xaxs} option}
 \item{...}{Further arguments to be passed to plot}
 }
- 
-\note{When \kbd{(x|y)lim} is used, if the axis is in log, the user must supply a power of ten. Otherwise, the absolute values must be supplied.}
+
 
 \examples{ 
 a <- seq(from=1,to=100,by=0.1)^2
