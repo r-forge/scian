@@ -28,23 +28,25 @@ drawlogaxis <- function(side,range)
 	axis(side,at=ats,labels=NA)
 }
 
-logplot <- function(x,y,log='xy',forceylim=c(0,0),forcexlim=c(0,0),yint='r',xint='r',...)
+logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
 {
 	if(missing(y))
 	{
 		y <- x
 		x <- c(1:length(x))
 	}
+	if(is.null(xlim)){xlim=range(x)}
+	if(is.null(ylim)){ylim=range(y)}
 	par(tck=0.02,xaxs=xint,yaxs=yint)
 	xlg <- FALSE
 	ylg <- FALSE
 	if('x'%in%strsplit(log,'')[[1]]){x <- log(x,10);xlg=TRUE}
 	if('y'%in%strsplit(log,'')[[1]]){y <- log(y,10);ylg=TRUE}
-	yl <- ifelse(forceylim==c(0,0),range(y),forceylim)
-	xl <- ifelse(forcexlim==c(0,0),range(x),forcexlim)
-	plot(x,y,...,axes=FALSE,ylim=yl,xlim=xl)
-	if(xlg){drawlogaxis(1,xl)}else{axis(1,at=pretty(xl),labels=pretty(xl))}
-	if(ylg){drawlogaxis(2,yl)}else{axis(2,at=pretty(yl),labels=pretty(yl))}
+	if(xlg){xlim=xlim}else{xlim=xlim}
+	if(ylg){ylim=ylim}else{ylim=ylim}
+	plot.default(x,y,axes=FALSE,ylim=ylim,xlim=xlim,...)
+	if(xlg){drawlogaxis(1,xlim)}else{axis(1,at=pretty(xlim),labels=pretty(xlim))}
+	if(ylg){drawlogaxis(2,ylim)}else{axis(2,at=pretty(ylim),labels=pretty(ylim))}
 	box()
 }
 
@@ -83,7 +85,7 @@ logfill <- function(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black
 	} else {
 		fyl <- range(y)
 	}
-	logplot(1,1,forcexlim=fxl,forceylim=fyl,log=log,pch=NA,xint=int[1],yint=int[2],...)
+	logplot(1,1,xlim=fxl,ylim=fyl,log=log,pch=NA,xint=int[1],yint=int[2],...)
 	levels <- pretty(range(z),f.nbins)
 	col <- pal(length(levels)-1)
 	.Internal(filledcontour(
