@@ -99,3 +99,12 @@ logfill <- function(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black
 
 hcp1 <- colorRampPalette(c('darkblue','blue','turquoise','green','yellow','orange','red','darkred'))
 hcp2 <- colorRampPalette(c("black","darkblue","blue","green","orange",'yellow',"red","darkred"))
+
+loglm <- function(mod,log='xy',range=c(1e-1,1e2),...)
+{
+	cdir <- mod$coeff[2]
+	orao <- mod$coeff[1]
+	x <- seq(from=range[1],to=range[2],length.out=1e3)
+	y <- x * cdir + orao
+	addlog(x,y,type='l',log=log,...)
+}
