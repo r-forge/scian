@@ -65,7 +65,7 @@ addlog <- function(x,y,log='xy',...)
 	
 }
 
-logfill <- function(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black',int=c('i','i'),labcex=0.8,...)
+logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',c.col='black',int=c('i','i'),labcex=0.8,...)
 {
 	if(is.null(colnames(z))){colnames(z)<-c(1:ncol(z))}
 	if(is.null(rownames(z))){rownames(z)<-c(1:nrow(z))}
@@ -96,15 +96,20 @@ logfill <- function(z,pal=cm.colors,f.nbins=100,c.nbins=10,log='xy',c.col='black
 	if(c.nbins>0){contour(x,y,z,add=TRUE,col=c.col,n.levels=c.nbins,labcex=labcex)}
 }
 
-
-hcp1 <- colorRampPalette(c('darkblue','blue','turquoise','green','yellow','orange','red','darkred'))
-hcp2 <- colorRampPalette(c("black","darkblue","blue","green","orange",'yellow',"red","darkred"))
-
-loglm <- function(mod,log='xy',range=c(1e-1,1e2),...)
+loglm <- function(mod,log='xy',range=NULL,...)
 {
+	if(is.null(range)){
+		predictors <- eval(attr(terms(mod),'variables'))[[1]]
+		ampli <- diff(range(predictors))
+		range <- c((min(predictors)-0.2*ampli),(max(predictors)+0.2*ampli))
+	}
 	cdir <- mod$coeff[2]
 	orao <- mod$coeff[1]
 	x <- seq(from=range[1],to=range[2],length.out=1e3)
 	y <- x * cdir + orao
 	addlog(x,y,type='l',log=log,...)
 }
+
+hcp1 <- colorRampPalette(c('darkblue','blue','turquoise','green','yellow','orange','red','darkred'))
+hcp2 <- colorRampPalette(c("black","darkblue","blue","green","orange",'yellow',"red","darkred"))
+hcp3 <- colorRampPalette(c(rgb(0,0,255,max='255'),rgb(15,251,240,max='255'),rgb(247,251,9,max='255'),rgb(246,150,9,max='255'),rgb(247,4,1,max='255'),rgb(128,4,0,max='255')))

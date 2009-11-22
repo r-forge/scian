@@ -4,13 +4,13 @@
 \title{Add a linear model to a plot}
 \description{Plot the regression line of a linear model to a plot}
 \usage{ 
-loglm(mod,log='xy',range=c(1e-1,1e2),...)
+loglm(mod,log='xy',range=NULL,...)
 }
 
 \arguments{ 
 \item{mod}{The matrix to be plotted. X and Y coordinates must be passed as rownames and colnames respectively} 
 \item{log}{The axes to be transformed to log} 	
-\item{range}{The interval on which the regression line is to be plotte}
+\item{range}{The interval on which the regression line is to be plotted (calculated internally with the model terms if none is supplied)}
 \item{...}{Further arguments to be passed to addlog}
 }
 
