@@ -1,7 +1,7 @@
 readlayout <- function(file)
 {
 	## Commandes générales
-	layout <- read.csv(file,sep=';',header=T)
+	layout <- read.csv(file,sep=';',header=TRUE)
 	cols <- layout[,1]
 	layout <- layout[,c(2:ncol(layout))]
 	rownames(layout) <- cols

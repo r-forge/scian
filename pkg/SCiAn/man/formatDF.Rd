@@ -9,8 +9,3 @@ formatDF(data)
 \arguments{ 
 \item{data}{A data frame containing all the values for the wells during the whole cinetic} 
 } 
-
-\examples{ 
-## read from a file
-formatDF(read.cinetic(file.choose()))
-} 

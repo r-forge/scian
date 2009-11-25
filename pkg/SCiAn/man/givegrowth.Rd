@@ -20,8 +20,6 @@ givegrowth(y,x=c(1:length(y)),bw=12)
 \note{R Craig Mac Lean provided the algorithm used in this function}
 
 \examples{ 
-## Read a cinetic fie
-cin <- formatDF(read.cinetic(file.choose()))
 ## Get max. growth rate
-givegrowth(cin$A1,bw=8)
+givegrowth(SSlogis(c(-10:10),1,2,1),bw=8)
 } 
