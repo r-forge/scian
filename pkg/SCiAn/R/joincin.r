@@ -1,8 +1,9 @@
 joincin = function(list)
 {
+	out <- formatDF(list[[1]])
 	for(i in 2:length(list))
 	{
-		list[[1]] <- as.data.frame(rbind(list[[1]],list[[i]]))
+		out <- as.data.frame(rbind(out,formatDF(list[[i]])))
 	}
-	return(list[[1]])
+	return(out)
 }
