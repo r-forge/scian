@@ -1,8 +1,13 @@
 analyse <- function(file,layout,func,...)
 {
-
+	if(is.list(file))
+	{
+		cins <- lapply(file,read.cinetic)
+		DAT <- joincin(cins)
+	} else {
+		DAT <- formatDF(read.cinetic(file))
+	}
 	LAY <- readlayout(layout)
-	DAT <- formatDF(read.cinetic(file))
 	RES <- vector(len=ncol(DAT))
 	for(i in 1:length(RES))
 	{
