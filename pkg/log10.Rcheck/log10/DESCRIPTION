@@ -1,0 +1,11 @@
+Package: log10
+Version: 0.1.0-01
+Date: 2009-11-17
+Title: Decimal log plotting in two and three dimensions
+Author: Timothee Poisot <timothee.poisot@univ-montp2.fr>
+Maintainer: Timothee Poisot <timothee.poisot@univ-montp2.fr>
+Depends: R (>= 1.8.0)
+Description: Provides a range of function for 10-log plotting
+License: GPL (>= 2)
+URL: http://homepage.mac.com/tim.poisot
+Built: R 2.10.0; ; 2009-11-23 08:45:48 UTC; unix

@@ -1,0 +1,8 @@
+addlog                  Add elements on a decimal log x-y plot
+hcp1                    High contrast palette 1
+hcp2                    High contrast palette 2
+hcp3                    High contrast palette 3
+logaxis                 Draw a 10-log scale axis
+logfill                 Decimal x-y filledcontour plot
+loglm                   Add a linear model to a plot
+logplot                 Decimal x-y plot
