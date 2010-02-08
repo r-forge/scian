@@ -1,10 +1,10 @@
 Package: SCiAn
-Version: 0.2.0-04
+Version: 0.2.1-04
 Date: 2009-09-03
 Title: Spectrophotometry : CInetic ANalysis
-Author: Timothee Poisot <timothee.poisot@univ-montp2.fr>
-Maintainer: Timothee Poisot <timothee.poisot@univ-montp2.fr>
+Author: Timothee Poisot <tpoisot@um2.fr>
+Maintainer: Timothee Poisot <tpoisot@um2.fr>
 Depends: R (>= 1.8.0)
 Description: Handling and analysis of spectrophotometry files, estimation of bacterial growth parameters 
 License: GPL (>= 2) 
-URL: http://homepage.mac.com/tim.poisot
+URL: http://www.timotheepoisot.fr/R/
