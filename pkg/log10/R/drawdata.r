@@ -1,9 +1,12 @@
-drawdata <- function(x,y,pch=23,bg='white',lty=1,col=bg,log='')
+drawdata = function(x,y,pch=23,bg='white',lwd=1,lty=1,col='black',meanonly=FALSE)
 {
-	if ("x" %in% strsplit(log, "")[[1]]) {
+	if(!exists('GLL')){GLL<-''}
+	xlg <- FALSE
+	ylg <- FALSE
+	if ("x" %in% strsplit(GLL, "")[[1]]) {
 		xlg = TRUE
 	}
-	if ("y" %in% strsplit(log, "")[[1]]) {
+	if ("y" %in% strsplit(GLL, "")[[1]]) {
 		ylg = TRUE
 	}
 	
@@ -30,7 +33,7 @@ drawdata <- function(x,y,pch=23,bg='white',lty=1,col=bg,log='')
 		low <- log(low,10)
 	}
 	
-	arrows(lev,up,lev,low,code=3,angle=90,length=0.02)
-	lines(lev,means)
+	if(!meanonly){arrows(lev,up,lev,low,code=3,angle=90,length=0.02)}
+	lines(lev,means,lty=lty,col=col,lwd=lwd)
 	points(lev,means,pch=pch,bg=bg,cex=1.2)	
 }
