@@ -6,6 +6,12 @@ ReadAndCal = function(fname)
 	return(calpoints)
 }
 
+ReadImg = function(fname)
+{
+	img <- read.jpeg(fname)
+	plot(img)
+}
+
 DigitData = function(col='red',type='p',...)
 {
 	type <- ifelse(type=='b','o',type)
