@@ -19,7 +19,7 @@ DigitData = function(col='red',type='p',...)
 	locator(type=type,col=col,...)
 }
 
-Calibrate = function(calpoints,data,x1,x2,y1,y2)
+Calibrate = function(data,calpoints,x1,x2,y1,y2)
 {
 	x 		<- calpoints$x[c(1,2)]
 	y 		<- calpoints$y[c(3,4)]
