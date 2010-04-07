@@ -98,6 +98,7 @@ logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',c.col='black',int
 		logaxis(2,log(yl,10))
 	}
 	if(c.nbins>0){contour(x,y,z,add=TRUE,col=c.col,n.levels=c.nbins,labcex=labcex)}
+	box()
 }
 
 loglm <- function(mod,range=NULL,...)
@@ -115,12 +116,15 @@ loglm <- function(mod,range=NULL,...)
 	addlog(x,y,type='l',log=GLL,...)
 }
 
-hcp1 <- colorRampPalette(c('darkblue','blue','turquoise','green','yellow','orange','red','darkred'))
+
+hcp1 <- colorRampPalette(c(rgb(122,255,109,maxColorValue=255),rgb(189,255,93,maxColorValue=255),rgb(252,255,83,maxColorValue=255),rgb(255,139,29,maxColorValue=255),rgb(255,69,15,maxColorValue=255)))
 hcp2 <- colorRampPalette(c("black","darkblue","blue","green","orange",'yellow',"red","darkred"))
 hcp3 <- colorRampPalette(c(rgb(0,0,255,max='255'),rgb(15,251,240,max='255'),rgb(247,251,9,max='255'),rgb(246,150,9,max='255'),rgb(247,4,1,max='255'),rgb(128,4,0,max='255')))
 hcp4 <- colorRampPalette(c("blue", "green", "orange", "magenta", "cyan", "red", "yellow", "gray"))
 hcp5 <- colorRampPalette(c("white", "lightgrey", "black"))
 hcp6 <- colorRampPalette(c('white','skyblue','darkblue'))
+hcp7 <- colorRampPalette(c('darkblue','blue','turquoise','green','yellow','orange','red','darkred'))
+hcp8 <- colorRampPalette(c('black',rgb(0.1,0.1,0.1),'darkorange','white'))
 
 scale = function(v,m=0,M=1)
 {
