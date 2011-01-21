@@ -8,7 +8,7 @@ givedoubling = function (y, x = c(1:length(y)), bw = 10, mtime = 6)
         list.of.coeff[i] <- cur.lm
     }
     result <- max(list.of.coeff)
-    pos <- match(max(list.of.coeff), list.of.coeff)
+    pos <- which.max(list.of.coeff)
 	mod <- lm(y[pos:(pos + bw)] ~ x[pos:(pos + bw)])
     fit <- mod$fitted.value
 	coe <- mod$coeff

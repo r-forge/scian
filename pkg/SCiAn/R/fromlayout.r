@@ -1,12 +1,9 @@
 fromlayout = function (layout, data) 
 {
-    results <- list()
-    samplenames <- unique(layout[, 1])
-    for (i in 1:length(samplenames)) {
-        pos.todo <- subset(layout[, 2], layout[, 1] == samplenames[i])
-        partial.results <- as.vector(data[pos.todo])
-        results[[length(results) + 1]] <- as.numeric(partial.results)
-    }
-    names(results) <- samplenames
+
+	data<-layout[,1][match(names(data),layout[,2])]
+	OK<-!is.na(Nam)
+	out<-as.data.frame(cbind(Cond=Nam[OK],Val=data[OK]))
+    results <- lapply(split(out$Val,out$Cond),function(x)as.numeric(as.vector(x)))
     return(results)
 }
