@@ -1,6 +1,10 @@
+loggrid <- function(...){
+	grid(...)
+}
+
 logaxis <- function(side,range)
 {
-	par(tck=0.02,las=1)
+	ctck <- par('tck')
 	d <- range
 	mlog <- floor(min(d))
 	Mlog <- ceiling(max(d))
@@ -24,11 +28,14 @@ logaxis <- function(side,range)
 	}
 	ats <- rep(ats,Nlog)
 	ats <- ats+mod
-	par(tck=0.02/3)
-	axis(side,at=ats,labels=NA)
+	par(tck=ctck/3)
+	if(diff(range(SeqLog))<6)
+	{
+		axis(side,at=ats,labels=NA)
+	}
 }
 
-logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
+logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,tck=-0.015,las=1,grid=TRUE,...)
 {
 	GLL <<- log
 	if(missing(y))
@@ -38,7 +45,7 @@ logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
 	}
 	if(is.null(xlim)){xlim=range(x)}
 	if(is.null(ylim)){ylim=range(y)}
-	par(tck=0.02,xaxs=xint,yaxs=yint)
+	par(tck=tck,las=las,xaxs=xint,yaxs=yint)
 	xlg <- FALSE
 	ylg <- FALSE
 	if('x'%in%strsplit(GLL,'')[[1]]){x <- log(x,10);xlg=TRUE}
@@ -47,6 +54,10 @@ logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,...)
 	if(ylg){ylim=log(ylim,10)}else{ylim=ylim}
 	plot.default(x,y,axes=FALSE,ylim=ylim,xlim=xlim,...)
 	rect(par()$usr[1],par()$usr[3],par()$usr[2],par()$usr[4],density=NA,col='white')
+	if(grid)
+	{
+		loggrid()
+	}
 	points(x,y,...)
 	if(xlg){logaxis(1,xlim)}else{axis(1,at=pretty(xlim),labels=pretty(xlim))}
 	if(ylg){logaxis(2,ylim)}else{axis(2,at=pretty(ylim),labels=pretty(ylim))}
