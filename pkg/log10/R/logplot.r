@@ -1,8 +1,8 @@
 loggrid <- function(...){
-	grid(...)
+  grid(...)
 }
 
-logaxis <- function(side,range)
+logaxis <- function(side,range,labels=TRUE)
 {
 	ctck <- par('tck')
 	d <- range
@@ -14,10 +14,20 @@ logaxis <- function(side,range)
 	{
 		if(i==0)
 		{
-			axis(side,at=i,labels=substitute(1^phantom(0)))
+      if(labels)
+      {
+        axis(side,at=i,labels=substitute(1^phantom(0)))
+      } else {
+        axis(side,at=i,labels=FALSE)
+      }
 		}
 		else{
-			axis(side,at=i,labels=substitute(10^i))
+      if(labels)
+      {
+        axis(side,at=i,labels=substitute(10^i))
+      } else {
+        axis(side,at=i,labels=FALSE)
+      }
 		}
 	}
 	ats <- log(seq(from=2,to=9,by=1),10)
