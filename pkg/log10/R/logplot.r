@@ -113,10 +113,12 @@ logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',c.col='black',int
 	if('x'%in%strsplit(log,'')[[1]])
 	{
 		logaxis(1,log(xl,10))
+    logaxis(3,log(xl,10),FALSE)
 	}
 	if('y'%in%strsplit(log,'')[[1]])
 	{
 		logaxis(2,log(yl,10))
+    logaxis(4,log(yl,10),FALSE)
 	}
 	if(c.nbins>0){contour(x,y,z,add=TRUE,col=c.col,n.levels=c.nbins,labcex=labcex)}
 	box()
