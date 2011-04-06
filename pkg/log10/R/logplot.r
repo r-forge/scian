@@ -4,7 +4,7 @@ loggrid <- function(...){
 
 logaxis <- function(side,range,labels=TRUE)
 {
-	ctck <- par('tck')
+	ctck <- par('tcl')
 	d <- range
 	mlog <- floor(min(d))
 	Mlog <- ceiling(max(d))
@@ -38,14 +38,17 @@ logaxis <- function(side,range,labels=TRUE)
 	}
 	ats <- rep(ats,Nlog)
 	ats <- ats+mod
-	par(tck=ctck/3)
+  
+  itcl <- par()['tcl']$tcl
+  par(tcl = itcl / 2)
 	if(diff(range(SeqLog))<6)
 	{
 		axis(side,at=ats,labels=NA)
 	}
+  par(tcl = itcl)
 }
 
-logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,tck=-0.015,las=1,grid=TRUE,...)
+logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,las=1,grid=TRUE,...)
 {
 	GLL <<- log
 	if(missing(y))
@@ -55,7 +58,7 @@ logplot <- function(x,y,log='xy',yint='r',xint='r',xlim=NULL,ylim=NULL,tck=-0.01
 	}
 	if(is.null(xlim)){xlim=range(x)}
 	if(is.null(ylim)){ylim=range(y)}
-	par(tck=tck,las=las,xaxs=xint,yaxs=yint)
+	par(las=las,xaxs=xint,yaxs=yint)
 	xlg <- FALSE
 	ylg <- FALSE
 	if('x'%in%strsplit(GLL,'')[[1]]){x <- log(x,10);xlg=TRUE}
@@ -90,7 +93,7 @@ addlog <- function(x,y,...)
 	
 }
 
-logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',c.col='black',int=c('i','i'),labcex=0.8,...)
+logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',addaxes=FALSE,c.col='black',int=c('i','i'),labcex=0.8,grid=FALSE,...)
 {
 	if(is.null(colnames(z))){colnames(z)<-c(1:ncol(z))}
 	if(is.null(rownames(z))){rownames(z)<-c(1:nrow(z))}
@@ -100,7 +103,7 @@ logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',c.col='black',int
 	yl <- range(y)
 	if('x'%in%strsplit(log,'')[[1]]){x <- log(x,10)}
 	if('y'%in%strsplit(log,'')[[1]]){y <- log(y,10)}
-	logplot(range(x),range(y),log=log,pch=NA,xint=int[1],yint=int[2],xlim=xl,ylim=yl,...)
+	logplot(range(x),range(y),log=log,pch=NA,xint=int[1],yint=int[2],xlim=xl,ylim=yl,grid=grid,...)
 	levels <- pretty(range(z),f.nbins)
 	col <- pal(length(levels)-1)
 	.Internal(filledcontour(
@@ -113,12 +116,16 @@ logfill <- function(z,pal=hcp3,f.nbins=100,c.nbins=10,log='xy',c.col='black',int
 	if('x'%in%strsplit(log,'')[[1]])
 	{
 		logaxis(1,log(xl,10))
-    logaxis(3,log(xl,10),FALSE)
+    if(addaxes) logaxis(3,log(xl,10),FALSE)
+	} else {
+    if(addaxes) axis(3,labels=FALSE)
 	}
 	if('y'%in%strsplit(log,'')[[1]])
 	{
 		logaxis(2,log(yl,10))
-    logaxis(4,log(yl,10),FALSE)
+    if(addaxes) logaxis(4,log(yl,10),FALSE)
+	} else {
+    if(addaxes) axis(4,labels=FALSE)
 	}
 	if(c.nbins>0){contour(x,y,z,add=TRUE,col=c.col,n.levels=c.nbins,labcex=labcex)}
 	box()
