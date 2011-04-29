@@ -27,4 +27,4 @@ formatPlate = function(path)
         DF <- rbind(DF,unlist(df))
 	}
 	return(as.data.frame(DF))
-}S
+}
